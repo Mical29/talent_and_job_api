@@ -2,6 +2,7 @@ from account.models import Account
 from rest_framework import viewsets, permissions,generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from .models import Job
 from .models import UserAppliedJob as UJ
 from .serialisers import JobSerializer,UserAppliedJobSerializer
@@ -20,7 +21,7 @@ class CreateJob(APIView):
         serializer = JobSerializer(data=request.data)
         if serializer.is_valid():
             job = serializer.save()
-            return Response({"message" : "200 success : Job Created Successfully"})
+            return Response(status=status.HTTP_201_CREATED)
 
 class DeleteJob(APIView):
 
